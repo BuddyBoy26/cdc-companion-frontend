@@ -51,6 +51,9 @@ export default function AdminDashboardPage() {
     //   router.push('/login/admin')
     //   return
     // }
+
+
+
     async function loadAll() {
       try {
         setLoading(true)
@@ -75,7 +78,13 @@ export default function AdminDashboardPage() {
         setLoading(false)
       }
     }
-    loadAll()
+
+    if (typeof window !== 'undefined' && !localStorage.getItem('token')) {
+      router.push('/login/admin')
+    } else {
+      loadAll()
+    }
+
   }, [isAuthenticated, user, authFetch, router])
 
   const handleAllocate = async () => {

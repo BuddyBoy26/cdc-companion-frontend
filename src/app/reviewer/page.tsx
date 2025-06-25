@@ -354,7 +354,7 @@ export default function ReviewerDashboard() {
   // Redirect if no token
   useEffect(() => {
     if (typeof window !== 'undefined' && !localStorage.getItem('token')) {
-      router.push('/login/reviewer')
+      router.push('/login')
     } else {
       loadAssigned()
     }
