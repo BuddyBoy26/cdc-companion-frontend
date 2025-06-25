@@ -3,8 +3,10 @@ import './globals.css'
 import { AuthProvider } from '../context/AuthContext'
 
 export const metadata = {
-  title: 'My CDC Companion',
-  description: '…',
+  title: 'Communiqué | CDC Companion',
+  icons: {
+    icon: '/favicon.ico',
+  },
 }
 
 export default function RootLayout({
