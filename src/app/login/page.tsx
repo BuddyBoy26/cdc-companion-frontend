@@ -3,12 +3,12 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { useAuth } from '@/context/AuthContext'
+// import { useAuth } from '@/context/AuthContext'
 import { BACKEND_URL } from '@/constants/apiConstants'
 
 export default function LoginPage() {
   const router = useRouter()
-  const { login } = useAuth()
+  // const { login } = useAuth()
   const [name, setName] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
@@ -27,12 +27,16 @@ export default function LoginPage() {
       const data = await res.json()
       if (!res.ok) throw new Error(data.error || 'Login failed')
 
-      const { token, reviewer } = data
+      const { token } = data
       localStorage.setItem('token', token)
       // you could also do: loginWithToken(token, reviewer)
       router.push('/reviewer')
-    } catch (err: any) {
-      setError(err.message)
+    } catch (err) {
+      if (err instanceof Error) {
+        setError(err.message)
+      } else {
+        setError('An unknown error occurred')
+      }
     } finally {
       setIsLoading(false)
     }

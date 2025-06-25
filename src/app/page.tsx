@@ -106,8 +106,10 @@ if (!ROLL_REGEX.test(cleaned)) {
       }
       await submitApplication(payload)
       setShowConfirmation(true)
-    } catch (err: any) {
-      setError(err.message || "An error occurred. Please try again.")
+    } catch (e: unknown) {
+  if (e instanceof Error) {
+    setError(e.message)
+  }
     } finally {
       setIsLoading(false)
     }
@@ -135,32 +137,46 @@ if (!ROLL_REGEX.test(cleaned)) {
   if (showConfirmation) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center p-4">
-        <TopNavigation />
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="bg-gradient-to-br from-green-900/80 to-emerald-900/80 backdrop-blur-xl border border-green-500/20 p-10 rounded-3xl w-full max-w-md text-center shadow-2xl"
-        >
-          <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
-            <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-            </svg>
-          </div>
-          <h2 className="text-3xl font-bold text-green-300 mb-4">
-            CV Successfully Submitted!
-          </h2>
-          <p className="text-green-100/80 mb-8 leading-relaxed">
-            We'll notify you via email once your CV review is complete.
-          </p>
-          <Link
-            href="/"
-            className="inline-block bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 shadow-lg hover:shadow-green-500/25"
-            onClick={() => setShowConfirmation(false)}
-          >
-            Return Home
-          </Link>
-        </motion.div>
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      className="bg-gradient-to-br from-green-900/80 to-emerald-900/80 backdrop-blur-xl border border-green-500/20 p-10 pt-20 rounded-3xl w-full max-w-md text-center shadow-2xl relative z-10"
+    >
+      <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
+        <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+        </svg>
+      </div>
+      <h2 className="text-3xl font-bold text-green-300 mb-4">
+        CV Successfully Submitted!
+      </h2>
+      <p className="text-green-100/80 mb-8 leading-relaxed">
+        We’ll notify you via email once your CV review is complete.
+      </p>
+      {/* Return home link */}
+      {/* <Link
+        href="/"
+        className="inline-block mb-4 text-sm text-green-200 underline hover:text-green-100"
+      >
+        Go back to Homepage
+      </Link> */}
+      {/* Try PrepNest link */}
+      <a
+        href="https://prepnest.in/?refercode=PrepGrow-sahib-singhprepgrowthpartner-02"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="block mb-4 font-semibold text-white bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-full transition"
+      >
+        Try PrepNest
+      </a>
+      {/* Your provided image */}
+      <img
+        src="./prepnest.jpg"
+        alt="PrepNest Logo"
+        className="mx-auto mt-4 w-96 object-contain rounded-3xl shadow-2xl border border-white/10 backdrop-blur-sm"
+      />
+    </motion.div>
       </div>
     )
   }

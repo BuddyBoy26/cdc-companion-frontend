@@ -1,14 +1,14 @@
 // pages/login.tsx
 'use client'
 
-import { useState, FormEvent } from 'react'
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { useAuth } from '../../../context/AuthContext'
+// import { useAuth } from '../../../context/AuthContext'
 import { BACKEND_URL } from '@/constants/apiConstants'
 
 export default function LoginPage() {
   const router = useRouter()
-  const { login } = useAuth()
+  // const { login } = useAuth()
   const [name, setName] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
@@ -39,7 +39,7 @@ const handleSubmit = async (e: React.FormEvent) => {
     }
 
     // 3) on success you get back { token, admin: { id, name, profiles, isAdmin } }
-    const { token, admin } = data
+    const { token } = data
 
     // 4) store the token however you like (localStorage, cookie, context…)
     localStorage.setItem('token', token)
@@ -49,8 +49,12 @@ const handleSubmit = async (e: React.FormEvent) => {
 
     // 5) redirect into your admin area
     router.push('/admin')
-  } catch (err: any) {
-    setError(err.message)
+  } catch (err: unknown) {
+    if (err instanceof Error) {
+      setError(err.message)
+    } else {
+      setError('An unknown error occurred')
+    }
   } finally {
     setIsLoading(false)
   }

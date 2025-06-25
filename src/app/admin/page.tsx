@@ -65,8 +65,12 @@ export default function AdminDashboardPage() {
         setReviewees(await rqs.json())
         setReviewers(await rrs.json())
         setReviews(await res.json())
-      } catch (e: any) {
-        setError(e.message)
+      } catch (e) {
+        if (e instanceof Error) {
+          setError(e.message)
+        } else {
+          setError(String(e))
+        }
       } finally {
         setLoading(false)
       }
@@ -82,8 +86,12 @@ export default function AdminDashboardPage() {
       // reload reviewees to see assignments
       const updated = await authFetch(`${BACKEND_URL}/api/admin/reviewees`)
       if (updated.ok) setReviewees(await updated.json())
-    } catch (e: any) {
-      setError(e.message)
+    } catch (e) {
+      if (e instanceof Error) {
+        setError(e.message)
+      } else {
+        setError(String(e))
+      }
     } finally {
       setAllocating(false)
     }
