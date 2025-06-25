@@ -116,22 +116,22 @@ if (!ROLL_REGEX.test(cleaned)) {
   }
 
   // Top Navigation with Login Button
-  const TopNavigation = () => (
-  <div className="fixed top-0 right-0 p-6 z-10 flex flex-col space-y-4">
-    <Link
-      href="/login/admin"
-      className="px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-full font-medium transition-all duration-300 shadow-lg hover:shadow-blue-500/25"
-    >
-      Admin Login
-    </Link>
-    <Link
-      href="/login/reviewer"
-      className="px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-full font-medium transition-all duration-300 shadow-lg hover:shadow-blue-500/25"
-    >
-      Reviewer Login
-    </Link>
-  </div>
-)
+//   const TopNavigation = () => (
+//   <div className="fixed top-0 right-0 p-6 z-10 flex flex-col space-y-4">
+//     <Link
+//       href="/login/admin"
+//       className="px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-full font-medium transition-all duration-300 shadow-lg hover:shadow-blue-500/25"
+//     >
+//       Admin Login
+//     </Link>
+//     <Link
+//       href="/login/reviewer"
+//       className="px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-full font-medium transition-all duration-300 shadow-lg hover:shadow-blue-500/25"
+//     >
+//       Reviewer Login
+//     </Link>
+//   </div>
+// )
 
   // Success view
   if (showConfirmation) {
@@ -189,21 +189,48 @@ if (!ROLL_REGEX.test(cleaned)) {
         <div className="absolute -bottom-8 -left-8 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
       </div>
 
-      <TopNavigation />
-
       {/* Banner */}
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="w-full max-w-4xl mx-auto mb-8 relative z-10"
-      >
-        <img
-          src="/banner.png"
-          alt="Banner"
-          className="w-full rounded-2xl shadow-2xl border border-white/10"
-        />
-      </motion.div>
+<motion.div
+  initial={{ opacity: 0, y: -20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.6 }}
+  className="
+    w-full px-4 max-w-md mx-auto mb-3
+    sm:max-w-2xl
+    md:max-w-4xl
+    relative z-10
+  "
+>
+  <img
+    src="/banner.png"
+    alt="Banner"
+    className="w-full rounded-2xl shadow-2xl border border-white/10"
+  />
+</motion.div>
+
+{/* Auth Links */}
+<div
+  className="
+    mb-3 flex justify-center space-x-2
+    sm:fixed sm:top-0 sm:right-0 sm:mt-0 sm:flex-col sm:space-y-4 sm:space-x-0 sm:p-6
+    relative z-10
+  "
+>
+  <Link
+    href="/login/admin"
+    className="px-4 py-2 text-sm sm:text-base bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-full font-medium transition-all duration-300 shadow-lg hover:shadow-blue-500/25"
+  >
+    Admin Login
+  </Link>
+  <Link
+    href="/login/reviewer"
+    className="px-4 py-2 text-sm sm:text-base bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-full font-medium transition-all duration-300 shadow-lg hover:shadow-blue-500/25"
+  >
+    Reviewer Login
+  </Link>
+</div>
+
+
 
       {/* Main Form */}
       <div className="w-full max-w-lg relative z-10">
